@@ -27,3 +27,16 @@ Evidence: `SHOW GRANTS` on each schema.
 - Databricks Free Edition has no account console, so account groups cannot be created.
 - Workaround: grants were applied at the user level using placeholder users (`engineers@email.com`, `analysts@email.com`, `auditors@email.com`) instead of groups.
 - In a production workspace, these grants would be assigned to groups.
+
+## Repository Structure
+
+| Path | Description |
+|---|---|
+| `notebooks/01_create_catalog_schemas.ipynb` | Creates the `atlas` catalog and the bronze/silver/gold schemas (ATL-01) |
+| `notebooks/02_generate_bronze_data.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
+| `sql/03_grant_permissions.sql` | User-level grants per layer (ATL-03) |
+| `docs/images/` | Evidence screenshots |
+
+## Evidence
+
+![Catalog Explorer](docs/images/catalog-explorer.png)
