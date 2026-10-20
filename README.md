@@ -25,5 +25,5 @@ Evidence: `SHOW GRANTS` on each schema.
 
 ## Known Limitations
 - Databricks Free Edition has no account console, so account groups cannot be created.
-- Workaround: grants were applied at the user level using placeholder users (engineers@, analysts@, auditors@email.com) instead of groups.
+- Workaround: grants were applied at the user level using placeholder users (`engineers@email.com`, `analysts@email.com`, `auditors@email.com`) instead of groups.
 - In a production workspace, these grants would be assigned to groups.
