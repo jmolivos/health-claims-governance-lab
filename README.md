@@ -34,7 +34,7 @@ Evidence: `SHOW GRANTS` on each schema.
 |---|---|
 | `notebooks/01_Create_Catalog_and_Schemas.ipynb` | Creates the `atlas` catalog and the bronze/silver/gold schemas (ATL-01) |
 | `notebooks/02_Create_Data_Raw.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
-| `SQL/03_Grant_Permissions.sql` | User-level grants per layer (ATL-03) |
+| `sql/03_Grant_Permissions.sql` | User-level grants per layer (ATL-03) |
 | `docs/images/` | Evidence screenshots |
 
 ## Evidence
