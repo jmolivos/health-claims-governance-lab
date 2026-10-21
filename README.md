@@ -32,10 +32,11 @@ Evidence: `SHOW GRANTS` on each schema.
 
 | Path | Description |
 |---|---|
-| `notebooks/01_Create_Catalog_and_Schemas.ipynb` | Creates the `atlas` catalog and the bronze/silver/gold schemas (ATL-01) |
-| `notebooks/02_Create_Data_Raw.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
-| `sql/03_Grant_Permissions.sql` | User-level grants per layer (ATL-03) |
+| `notebooks/ATL-01_Create_Catalog_and_Schemas.ipynb` | Creates the `atlas` catalog and the bronze/silver/gold schemas (ATL-01) |
+| `notebooks/ATL-02_Create_Data_Raw.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
+| `sql/ATL-03_Grant_Permissions.dbquery.ipynb` | User-level grants per layer (ATL-03) |
 | `docs/images/` | Evidence screenshots |
+| `sql/ATL-05_Create_silver_claims.dbquery.ipynb` | Silver claims: flag duplicates instead of deleting (ATL-05) |
 
 ## Evidence
 
