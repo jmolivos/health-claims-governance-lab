@@ -32,19 +32,44 @@ Evidence: `SHOW GRANTS` on each schema.
 - Workaround: grants were applied at the user level using placeholder users (`engineers@email.com`, `analysts@email.com`, `auditors@email.com`) instead of groups.
 - In a production workspace, these grants would be assigned to groups.
 
-## Repository Structure
 
+## Repository Structure
 | Path | Description |
 |---|---|
 | `notebooks/ATL-01_Create_Catalog_and_Schemas.ipynb` | Creates the `atlas` catalog and the bronze/silver/gold schemas (ATL-01) |
 | `notebooks/ATL-02_Create_Data_Raw.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
 | `sql/ATL-03_Grant_Permissions.dbquery.ipynb` | User-level grants per layer (ATL-03) |
 | `sql/ATL-05_Create_silver_claims.dbquery.ipynb` | Silver claims: flag duplicates instead of deleting (ATL-05) |
-| `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb` | Creates silver members and masks sensitive columns (ATL-06) |
+| `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb` | Silver members: mask sensitive information (ATL-06) |
 | `docs/images/` | Evidence screenshots |
 
-## Column Masking (ATL-06)
 
+## Duplicate Handling (ATL-05)
+`atlas.silver.claims` flags duplicate claims instead of deleting them, so the full history is kept for auditing.
+
+**Rule:** claims with the same `member_id`, `provider_id`, `service_date` and `amount` are considered duplicates.
+They are ranked with `ROW_NUMBER()` ordered by `billing_date`:
+
+| Row | is_duplicate | dedupe_reason |
+|---|---|---|
+| First (earliest billing_date) | false | NULL |
+| Others | true | resubmission |
+
+**Result:**
+
+| Table | Rows | Original | Flagged duplicates |
+|---|---|---|---|
+| bronze.claims | 103,000 | — | — |
+| silver.claims | 103,000 | 100,000 | 3,000 |
+
+**Why flag instead of delete:** analysts filter `is_duplicate = false` for reporting, while auditors can still review resubmissions.
+
+**Evidence:** duplicate count by `is_duplicate`.
+![Silver claims duplicates](docs/images/silver_claims_duplicates.png)
+
+SQL: `sql/ATL-05_Create_silver_claims.dbquery.ipynb`
+
+## Column Masking (ATL-06)
 Sensitive member data in `atlas.silver.members` is protected with Unity Catalog column masks.
 
 | Column | Masked | Masked value | Reason |
@@ -64,8 +89,6 @@ Authorized users (engineers) see the real value; everyone else sees the masked v
 check individual user emails instead of group membership (e.g. `is_account_group_member()`).
 
 **Evidence:** masked query results with an unauthorized user.
-![Masked silver members](docs/images/silver_members_mask.png)
+![Catalog Explorer](docs/images/silver_members_mask.png)
 
 SQL: `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb`
-
-
