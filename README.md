@@ -90,6 +90,6 @@ Authorized users (engineers) see the real value; everyone else sees the masked v
 check individual user emails instead of group membership (e.g. `is_account_group_member()`).
 
 **Evidence:** masked query results with an unauthorized user.
-![Catalog Explorer](docs/images/silver_members_mask.png)
+![Masked silver members](docs/images/silver_members_mask.png)
 
 SQL: `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb`
