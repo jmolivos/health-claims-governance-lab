@@ -40,7 +40,7 @@ Evidence: `SHOW GRANTS` on each schema.
 | `notebooks/ATL-02_Create_Data_Raw.ipynb` | Generates synthetic data with PySpark/Faker and loads it to bronze (ATL-02) |
 | `sql/ATL-03_Grant_Permissions.dbquery.ipynb` | User-level grants per layer (ATL-03) |
 | `sql/ATL-05_Create_silver_claims.dbquery.ipynb` | Silver claims: flag duplicates instead of deleting (ATL-05) |
-| `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb` | Silver members: mask sensitive information (ATL-06) |
+| `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb` | Creates silver members and masks sensitive columns (ATL-06) |
 | `docs/images/` | Evidence screenshots |
 
 ## Column Masking (ATL-06)
@@ -64,7 +64,7 @@ Authorized users (engineers) see the real value; everyone else sees the masked v
 check individual user emails instead of group membership (e.g. `is_account_group_member()`).
 
 **Evidence:** masked query results with an unauthorized user.
-![Catalog Explorer](docs/images/silver_members_mask.png)
+![Masked silver members](docs/images/silver_members_mask.png)
 
 SQL: `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb`
 
