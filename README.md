@@ -15,7 +15,6 @@ Catalog: `atlas` — schemas: `bronze`, `silver`, `gold`
 Data was generated with PySpark and Faker, with deliberate data quality issues to be fixed in the silver layer.
 
 ## Evidence
-
 ![Catalog Explorer](docs/images/catalog-explorer.png)
 
 ## Access Model
@@ -68,6 +67,7 @@ They are ranked with `ROW_NUMBER()` ordered by `billing_date`:
 ![Silver claims duplicates](docs/images/silver_claims_duplicates.png)
 
 SQL: `sql/ATL-05_Create_silver_claims.dbquery.ipynb`
+
 
 ## Column Masking (ATL-06)
 Sensitive member data in `atlas.silver.members` is protected with Unity Catalog column masks.
