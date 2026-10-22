@@ -64,6 +64,7 @@ They are ranked with `ROW_NUMBER()` ordered by `billing_date`:
 **Why flag instead of delete:** analysts filter `is_duplicate = false` for reporting, while auditors can still review resubmissions.
 
 **Evidence:** duplicate count by `is_duplicate`.
+
 ![Silver claims duplicates](docs/images/silver_claims_duplicates.png)
 
 SQL: `sql/ATL-05_Create_silver_claims.dbquery.ipynb`
