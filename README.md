@@ -116,4 +116,4 @@ Unity Catalog does not allow a row filter to read a table that has its own row f
 | A | Madrid | Madrid · 20,928 claims |
 | B | Catalonia | Catalonia · 21,174 claims |
 
-Same query, different mapping, different rows. SQL: `sql/ATL-07_Row_filter_claims.sql`.
+Same query, different mapping, different rows. SQL: `sql/ATL-07_row_filter_claims.dbquery.ipynb`.
