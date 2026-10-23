@@ -40,6 +40,7 @@ Evidence: `SHOW GRANTS` on each schema.
 | `sql/ATL-03_Grant_Permissions.dbquery.ipynb` | User-level grants per layer (ATL-03) |
 | `sql/ATL-05_Create_silver_claims.dbquery.ipynb` | Silver claims: flag duplicates instead of deleting (ATL-05) |
 | `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb` | Silver members: mask sensitive information (ATL-06) |
+| `sql/ATL-07_Row_filter_claims.dbquery.ipynb` | Row filter by region on silver claims (ATL-07) |
 | `docs/images/` | Evidence screenshots |
 
 
