@@ -93,3 +93,26 @@ check individual user emails instead of group membership (e.g. `is_account_group
 ![Masked silver members](docs/images/silver_members_mask.png)
 
 SQL: `sql/ATL-06_Column_mask_silver_members.dbquery.ipynb`
+
+## Row Filter (ATL-07)
+
+Analysts only see claims from their own region; engineers see all rows.
+
+**How it works**
+
+- `atlas.silver.analyst_regions` maps each user email to a region (one fictitious analyst per region, because Free Edition has no account groups).
+- `atlas.silver.rf_claims_by_region(member_id)` is a Unity Catalog row filter attached to `atlas.silver.claims`. It returns TRUE for engineers, or when the member's region matches the user's region.
+- `claims` has no region column, so the region is taken from members via `member_id`.
+
+**Limitation found**
+
+Unity Catalog does not allow a row filter to read a table that has its own row filter or column masks (`UNSUPPORTED_NESTED_ROW_OR_COLUMN_ACCESS_POLICY`). `silver.members` has column masks (ATL-06), so the filter reads a separate lookup table, `atlas.silver.member_regions` (member_id, region), without masks. This table must be rebuilt when members changes.
+
+**Evidence**
+
+| Test | User mapped to | Result |
+|---|---|---|
+| A | Madrid | Madrid · 20,928 claims |
+| B | Catalonia | Catalonia · 21,174 claims |
+
+Same query, different mapping, different rows. SQL: `sql/ATL-07_Row_filter_claims.sql`.
